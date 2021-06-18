@@ -48,23 +48,26 @@ export default function ListTab() {
         reportStatus = response.data.data.reportStatus;
         reportType = response.data.data.reportType;
       }
-      reportList.forEach(report => {
+      reportList.forEach((report) => {
         console.log("\n");
         console.log(report.status);
-        let status = reportStatus.filter(statusCode=>statusCode.code == report.status);
+        let status = reportStatus.filter(
+          (statusCode) => statusCode.code == report.status
+        );
         report.status = status[0].name;
-        let incidentName = incidentObject.filter(incident =>incident.code == report.incidentObject);
+        let incidentName = incidentObject.filter(
+          (incident) => incident.code == report.incidentObject
+        );
         report.incidentObject = incidentName[0].name;
-        let reportName = reportType.filter(name=>name.code == report.reportType);
+        let reportName = reportType.filter(
+          (name) => name.code == report.reportType
+        );
         report.reportType = reportName[0].name;
         console.log(report.status);
         console.log(report.incidentObject);
         console.log(report.reportType);
-        
-
-        
       });
-      
+
       // let response_department = await axios.post(
       //   "https://qlsc.maysoft.io/server/api/getAllDepartments",
       //   {},
@@ -74,7 +77,6 @@ export default function ListTab() {
       // if (response_department.status === 200) {
       //   departments = response_department.data.data.data;
       // }
-      
     }
     getData();
     // with [] parameter, just run the callback when the component mount for the first time.
@@ -94,12 +96,17 @@ export default function ListTab() {
         />
         <FilterIcon />
       </View>
-      <View style={styles.flatList}>
-      <FlatList
-        data={reports}
-        renderItem={Item}
-        keyExtractor={(report) => report.id}
-      />
+      <View style={styles.FloatingAction}>
+        <FloatingAction color="#ff9933" position={"right"} />
+      </View>
+      <View style={styles.shadow}>
+        <View style={styles.flatList}>
+          <FlatList
+            data={reports}
+            renderItem={Item}
+            keyExtractor={(report) => report.id}
+          />
+        </View>
       </View>
       <CalendarModal
         visible={ModalVisible}
@@ -118,9 +125,6 @@ export default function ListTab() {
           setVisible(false);
         }}
       />
-      <View style={styles.FloatingAction}>
-        <FloatingAction color="#ff9933" position={"right"} />
-      </View>
     </SafeAreaView>
   );
 }

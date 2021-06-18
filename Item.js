@@ -17,7 +17,7 @@ const Item = ({ item, index }) => {
       <Text style={[styles.item_text, styles.time]}>
         {format(date, "dd/MM/yyyy HH:mm")}
       </Text>
-      <View style={styles.row_item}>
+      <View style={[styles.row_item,styles.spaceBetwween]}>
         <View style={styles.column}>
           <View style={styles.row_item}>
             <Text style={styles.item_text}>{item.reportType}</Text>

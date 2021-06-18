@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
 
   header: {
     marginLeft: 20,
+    marginBottom: 20,
     height: 50,
     width: "85%",
   },
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
   },
   FloatingAction: {
     position: "absolute",
-    top: DeviceHieht * 0.9,
+    bottom:500,
     right: 1,
   },
   tabBarLabel: {
@@ -130,11 +131,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   item_text: {
-    fontSize: 18,
+    fontSize: 14,
     marginLeft: 10,
     marginBottom: 10,
   },
   item: {
+    marginRight: 5,
+    marginLeft: 5,
     paddingTop: 10,
     borderColor: "#ff9933",
     borderWidth: 1,
@@ -143,10 +146,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   flatList: {
-    marginLeft: 10,
-    marginRight: 10,
     backgroundColor: "#f2f2f2",
-    marginBottom:120
+    marginBottom:20,
+  },
+  shadow: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    marginBottom: 140,
+    elevation: 4,
   },
   bold: {
     fontWeight: "bold",
@@ -164,9 +179,12 @@ const styles = StyleSheet.create({
   time: {
     fontStyle: "italic",
   },
-  verticalOption:{
-    
-    
+  verticalOption: {
+    textAlign:'right'
+
+  },
+  spaceBetwween:{
+    justifyContent:'space-between'
   }
 });
 export default styles;
