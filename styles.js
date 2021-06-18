@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   FloatingAction: {
     position: "absolute",
-    top: DeviceHieht * 0.85,
+    top: DeviceHieht * 0.9,
     right: 1,
   },
   tabBarLabel: {
@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     backgroundColor: "#f2f2f2",
+    marginBottom:120
   },
   bold: {
     fontWeight: "bold",
