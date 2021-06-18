@@ -116,8 +116,9 @@ const styles = StyleSheet.create({
   },
   FloatingAction: {
     position: "absolute",
-    bottom:500,
+    top:DeviceHieht * 0.9,
     right: 1,
+    elevation:5
   },
   tabBarLabel: {
     fontSize: 12,

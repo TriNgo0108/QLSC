@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Text } from "react-native";
 import {
   MaterialCommunityIcons,
   FontAwesome,
@@ -12,7 +11,6 @@ import FollowTab from "./FollowTab";
 import ChartTab from "./ChartTab";
 import NotificationTab from "./NotificationTab";
 import PersonTab from "./PersonTab";
-import styles from "./styles";
 const Tab = createBottomTabNavigator();
 export default Home = () => {
   return (
