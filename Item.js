@@ -4,8 +4,8 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 import { fromUnixTime, format } from "date-fns";
 import styles from "./styles";
 
-const Item = ({ item, index }) => {
-  let date = new Date(item.reportTime);
+const Item = ({ item}) => {
+  let date = fromUnixTime(item.reportTime);
   return (
     <View style={[styles.column, styles.item]}>
       <View style={styles.row_item}>

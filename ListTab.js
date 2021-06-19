@@ -19,6 +19,10 @@ export default function ListTab() {
   const [fromDate, setFromDate] = useState(currentDate);
   const [toDate, setToDate] = useState(previousMonth);
   const [reports, setReports] = useState([]);
+  const [page,setPage] = useState(1);
+  const [incidentObjects,setIncidentObjet] = useState([]);
+  const [reportStatusList,setReportStatus] = useState([]);
+  const [reportTypeList,setReportType] = useState([]);
   useEffect(() => {
     async function getData() {
       let accessToken = await AsyncStorageStatic.getItem("@accessToken");
@@ -27,11 +31,10 @@ export default function ListTab() {
       let reportList = [];
       let reportStatus = [];
       let reportType = [];
-      let departments = [];
       let auth = `${tokenType} ${accessToken}`;
       let response_reports = await axios.post(
         "https://qlsc.maysoft.io/server/api/getAllReports",
-        { page: 1 },
+        { page: page },
         { headers: { Authorization: auth } }
       );
       if (response_reports.status === 200) {
@@ -47,10 +50,11 @@ export default function ListTab() {
         incidentObject = response.data.data.incidentObject;
         reportStatus = response.data.data.reportStatus;
         reportType = response.data.data.reportType;
+        setIncidentObjet(response.data.data.incidentObject);
+        setReportStatus(response.data.data.reportStatus);
+        setReportType(response.data.data.reportType);
       }
       reportList.forEach((report) => {
-        console.log("\n");
-        console.log(report.status);
         let status = reportStatus.filter(
           (statusCode) => statusCode.code == report.status
         );
@@ -63,9 +67,6 @@ export default function ListTab() {
           (name) => name.code == report.reportType
         );
         report.reportType = reportName[0].name;
-        console.log(report.status);
-        console.log(report.incidentObject);
-        console.log(report.reportType);
       });
 
       // let response_department = await axios.post(
@@ -83,7 +84,37 @@ export default function ListTab() {
     // In addition, using [] we'll tell useEffect that there are no properties we want to watch ann run the callback
     // Large different too between [] parameter and no parameter. With No Parameter, it should run when the component mounts and then on every single update
   }, []);
-
+  const paging = async()=>{
+    let accessToken = await AsyncStorageStatic.getItem("@accessToken");
+    let tokenType = await AsyncStorageStatic.getItem("@tokenType");
+    let auth = `${tokenType} ${accessToken}`;
+      let response = await axios.post(
+        "https://qlsc.maysoft.io/server/api/getAllReports",
+        { page: page },
+        { headers: { Authorization: auth } }
+      );
+      let reportList = response.data.data.data;
+      let incidentObject = incidentObjects;
+      let reportStatus = reportStatusList;
+      let reportType = reportTypeList;
+      reportList.forEach((report)=>{
+        let status = reportStatus.filter(
+          (statusCode) => statusCode.code == report.status
+        );
+        report.status = status[0].name;
+        let incidentName = incidentObject.filter(
+          (incident) => incident.code == report.incidentObject
+        );
+        report.incidentObject = incidentName[0].name;
+        let reportName = reportType.filter(
+          (name) => name.code == report.reportType
+        );
+        report.reportType = reportName[0].name;
+      });
+      let newReportList = [...reports];
+      newReportList.concat(reportList)
+  }
+ 
   return (
     <SafeAreaView style={[styles.main, styles.column]}>
       <View style={[styles.header, styles.row]}>
@@ -105,6 +136,12 @@ export default function ListTab() {
             data={reports}
             renderItem={Item}
             keyExtractor={(report) => report.id}
+            onEndReachedThreshold={0}
+            onEndReached ={(number)=>{
+              console.log("\n");
+              setPage(page+1);
+              paging();
+            }}
           />
         </View>
       </View>
