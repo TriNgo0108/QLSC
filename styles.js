@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   },
   flatList: {
     backgroundColor: "#f2f2f2",
-    marginBottom:20,
+    marginBottom:150,
   },
   shadow: {
     paddingLeft: 10,
@@ -161,7 +161,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-    marginBottom: 140,
     elevation: 4,
   },
   bold: {
