@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Pressable } from "react-native";
 import styles from "./styles";
 import { Text, Modal, View } from "react-native";
 import CustomDatePicker from "./CustomDatePicker";
@@ -12,10 +13,12 @@ const CalendarModal = ({
   onToDateChange,
   onSearch,
   onCancel,
+  onPressOut
 }) => {
   return (
     <Modal visible={visible} animationType="fade" transparent={true}>
-      <View style={styles.modal}>
+    <Pressable onPressOut={onPressOut} style={styles.modal}>
+      <View>
         <View style={styles.modalContent}>
           <Text style={styles.titile}>Tìm kiếm </Text>
           <CustomDatePicker
@@ -44,6 +47,7 @@ const CalendarModal = ({
           </View>
         </View>
       </View>
+      </Pressable>
     </Modal>
   );
 };

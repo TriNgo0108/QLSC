@@ -111,6 +111,9 @@ export default function ListTab() {
         visible={ModalVisible}
         fromData={fromDate}
         toDate={toDate}
+        onPressOut={()=>{
+          setVisible(false);
+        }}
         onFromDateChange={(date) => {
           setFromDate(date);
         }}
